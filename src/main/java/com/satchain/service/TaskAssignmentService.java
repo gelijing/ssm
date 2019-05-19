@@ -2,15 +2,18 @@ package com.satchain.service;
 
 import com.satchain.bean.bo.AddTaskBO;
 import com.satchain.bean.bo.QueryTaskBO;
+import com.satchain.bean.model.Satelliteinfo;
 import com.satchain.bean.model.Taskinfo;
-import com.satchain.commons.myEnum.TaskinfoDatadistrisignEnum;
+import com.satchain.bean.vo.TaskInfoVO;
 import com.satchain.commons.utils.TimeConvertUtil;
+import com.satchain.dao.SatelliteinfoMapper;
 import com.satchain.dao.TaskinfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,17 +22,54 @@ public class TaskAssignmentService {
     @Autowired
     private TaskinfoMapper taskinfoMapper;
 
+    @Autowired
+    private SatelliteinfoMapper satelliteinfoMapper;
+
     /**
      * 3 查询任务
      * @param bo
      * @return
      */
-    public List<Taskinfo> queryTask(QueryTaskBO bo){
+    public List<TaskInfoVO> queryTask(QueryTaskBO bo){
         Timestamp startTime = TimeConvertUtil.str2dateTime(bo.getPlanstarttime());
         Timestamp endTime = TimeConvertUtil.str2dateTime(bo.getPlanstoptime());
-        List<Taskinfo> taskinfoList = taskinfoMapper.
-                queryTaskInfoByTaskBO(bo.getConstellationid(),bo.getSatelliteid(),bo.getTasktype(),bo.getDistrisign(),startTime,endTime);
-        return taskinfoList;
+
+        List<String> satId = new ArrayList<>();
+        if (!bo.getConstellationid().isEmpty()&&bo.getSatelliteid().isEmpty()){
+            List<Satelliteinfo> satelliteinfos = satelliteinfoMapper.queryBySateOrConstID(null, bo.getConstellationid());
+            for (Satelliteinfo sat : satelliteinfos){
+                satId.add(sat.getSatelliteUuid());
+            }
+        }
+        if (!bo.getSatelliteid().isEmpty()){
+            satId.add(bo.getSatelliteid());
+        }
+
+        List<Taskinfo> taskinfoList = taskinfoMapper.queryTaskInfoByTaskBO(satId,bo.getTasktype(),bo.getDistrisign(),startTime,endTime);
+
+        List<TaskInfoVO> taskInfoVOS = new ArrayList<>();
+        for (Taskinfo taskinfo : taskinfoList){
+            TaskInfoVO taskInfoVO = new TaskInfoVO();
+            taskInfoVO.setTaskid(taskinfo.getTaskUuid());
+            String publishTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(taskinfo.getTaskReleaseTime());
+            taskInfoVO.setPublishTime(publishTime);
+            taskInfoVO.setSatelliteid(taskinfo.getSatelliteUuid());
+            taskInfoVO.setGroundid(taskinfo.getEarthUuid());
+            taskInfoVO.setTasktype(taskinfo.getTaskType());
+            String planstarttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(taskinfo.getPlanStartTime());
+            taskInfoVO.setPlanstartime(planstarttime);
+            String planendtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(taskinfo.getPlanEndTime());
+            taskInfoVO.setPlanendtime(planendtime);
+            String taskstarttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(taskinfo.getTaskStartTime());
+            taskInfoVO.setPlanstartime(taskstarttime);
+            String taskendtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(taskinfo.getTaskEndTime());
+            taskInfoVO.setPlanendtime(taskendtime);
+            taskInfoVO.setDistrisign(taskinfo.getDistributionFlag());
+            taskInfoVO.setDatadistrisign(taskinfo.getTaskFlag());
+            taskInfoVO.setAck(taskinfo.getAck());
+            taskInfoVOS.add(taskInfoVO);
+        }
+        return taskInfoVOS;
     }
 
     /**
@@ -55,9 +95,11 @@ public class TaskAssignmentService {
      * 更新任务
      * @param bo
      */
-    public Integer updateTask(QueryTaskBO bo){
+    public Integer updateTask(QueryTaskBO bo) throws Exception {
 
-        Assert.notNull(taskinfoMapper.selectByTaskId(bo.getTaskid()),"数据不存在！");
+        if (taskinfoMapper.selectByTaskId(bo.getTaskid()) == null){
+            throw new Exception("数据不存在！");
+        }
         Taskinfo taskinfo = new Taskinfo();
         taskinfo.setTaskUuid(bo.getTaskid());
         taskinfo.setSatelliteUuid(bo.getSatelliteid());
@@ -86,9 +128,6 @@ public class TaskAssignmentService {
      * @return
      */
     public Integer updateDistrisign(Integer taskid,Integer distrisign){
-        if (distrisign == null){
-            distrisign = TaskinfoDatadistrisignEnum.PUBLISHED.getCode();
-        }
         taskinfoMapper.updateFlagByTaskId(taskid,distrisign);
         return distrisign;
     }

@@ -10,15 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 设备关系表读取
- */
 @Service
 public class DeviceRelationService {
 
     @Autowired
     private DeviceRelationMapper deviceRelationMapper;
 
+    /**
+     * 设备关系表读取
+     * @param satelliteId
+     * @return
+     */
     public List<Map<String, String>> queryDevice(String satelliteId) {
 
         List<Map<String, String>> list = new ArrayList<>();

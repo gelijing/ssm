@@ -30,7 +30,7 @@ public class LoginController {
      * @param password
      * @return
      */
-    @RequestMapping(value = "/queryGroundStation1", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result getLogin(@RequestParam("username") String loginName, @RequestParam("password") String password, HttpServletRequest request){
         HttpSession session = request.getSession();
         String zhangxing = TokenUtil.genetateToken();

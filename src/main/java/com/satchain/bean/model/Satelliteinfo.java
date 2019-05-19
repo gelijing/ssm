@@ -1,5 +1,6 @@
 package com.satchain.bean.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ public class Satelliteinfo {
 
     private String constellationType;//所属星座
 
-    private Byte satelliteType;//卫星类型
+    private Integer satelliteType;//卫星类型
 
     private String telemetryFrequency;//遥测频率
 
@@ -34,7 +35,7 @@ public class Satelliteinfo {
 
     private String dataUplinkReceivingGain;//数据上行接收增益
 
-    private String businessDownlinkReceivingGain;//业务下行接收增益
+    private String businessDownlinkFrequency;//业务下行频率
 
     private String businessDownlinkErp;//业务下行ERP值
 
@@ -42,15 +43,15 @@ public class Satelliteinfo {
 
     private String businessUplinkReceivingGain;//业务上行接收增益
 
-    private Float dipAngle;//倾角
+    private BigDecimal dipAngle;//倾角
 
-    private Float equatorialRadius;//升交点赤径
+    private BigDecimal equatorialRadius;//升交点赤径
 
     private Float eccentricity;//偏心率
 
     private Float majorSemiaxis;//半长轴
 
-    private Float perigeeAngularDistance;//近地点角距
+    private BigDecimal perigeeAngularDistance;//近地点角距
 
     private Date perigeeMoment;//近地点时刻
 
@@ -94,11 +95,11 @@ public class Satelliteinfo {
         this.constellationType = constellationType;
     }
 
-    public Byte getSatelliteType() {
+    public Integer getSatelliteType() {
         return satelliteType;
     }
 
-    public void setSatelliteType(Byte satelliteType) {
+    public void setSatelliteType(Integer satelliteType) {
         this.satelliteType = satelliteType;
     }
 
@@ -166,12 +167,12 @@ public class Satelliteinfo {
         this.dataUplinkReceivingGain = dataUplinkReceivingGain;
     }
 
-    public String getBusinessDownlinkReceivingGain() {
-        return businessDownlinkReceivingGain;
+    public String getBusinessDownlinkFrequency() {
+        return businessDownlinkFrequency;
     }
 
-    public void setBusinessDownlinkReceivingGain(String businessDownlinkReceivingGain) {
-        this.businessDownlinkReceivingGain = businessDownlinkReceivingGain;
+    public void setBusinessDownlinkFrequency(String businessDownlinkFrequency) {
+        this.businessDownlinkFrequency = businessDownlinkFrequency;
     }
 
     public String getBusinessDownlinkErp() {
@@ -198,22 +199,6 @@ public class Satelliteinfo {
         this.businessUplinkReceivingGain = businessUplinkReceivingGain;
     }
 
-    public Float getDipAngle() {
-        return dipAngle;
-    }
-
-    public void setDipAngle(Float dipAngle) {
-        this.dipAngle = dipAngle;
-    }
-
-    public Float getEquatorialRadius() {
-        return equatorialRadius;
-    }
-
-    public void setEquatorialRadius(Float equatorialRadius) {
-        this.equatorialRadius = equatorialRadius;
-    }
-
     public Float getEccentricity() {
         return eccentricity;
     }
@@ -230,11 +215,27 @@ public class Satelliteinfo {
         this.majorSemiaxis = majorSemiaxis;
     }
 
-    public Float getPerigeeAngularDistance() {
+    public BigDecimal getDipAngle() {
+        return dipAngle;
+    }
+
+    public void setDipAngle(BigDecimal dipAngle) {
+        this.dipAngle = dipAngle;
+    }
+
+    public BigDecimal getEquatorialRadius() {
+        return equatorialRadius;
+    }
+
+    public void setEquatorialRadius(BigDecimal equatorialRadius) {
+        this.equatorialRadius = equatorialRadius;
+    }
+
+    public BigDecimal getPerigeeAngularDistance() {
         return perigeeAngularDistance;
     }
 
-    public void setPerigeeAngularDistance(Float perigeeAngularDistance) {
+    public void setPerigeeAngularDistance(BigDecimal perigeeAngularDistance) {
         this.perigeeAngularDistance = perigeeAngularDistance;
     }
 

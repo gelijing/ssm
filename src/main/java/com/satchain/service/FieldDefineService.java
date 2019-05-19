@@ -15,6 +15,12 @@ public class FieldDefineService {
     @Autowired
     private FieldDefineMapper fieldDefineMapper;
 
+    /**
+     * 3.12 字段定义表读取
+     * @param satelliteId
+     * @param deviceName
+     * @return
+     */
     public List<FieldVO> queryFieldByIdAndName(String satelliteId, String deviceName) {
         List<FieldVO> res = new ArrayList<>();
         List<FieldDefine> fieldDefines = fieldDefineMapper.selectByPrimaryKey(satelliteId,deviceName);

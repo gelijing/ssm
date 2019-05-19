@@ -10,7 +10,7 @@ public class Constellationinfo {
 
     private String constellationName;//星座名称
 
-    private Byte constellationType;//星座类型
+    private Integer constellationType;//星座类型
 
     private String userName;//业主名
 
@@ -38,11 +38,11 @@ public class Constellationinfo {
         this.constellationName = constellationName;
     }
 
-    public Byte getConstellationType() {
+    public Integer getConstellationType() {
         return constellationType;
     }
 
-    public void setConstellationType(Byte constellationType) {
+    public void setConstellationType(Integer constellationType) {
         this.constellationType = constellationType;
     }
 

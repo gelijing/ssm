@@ -4,7 +4,7 @@ public class FieldVO {
 
     private String fieldName;//字段名
 
-    private String type;//数据类型
+    private Integer type;//数据类型
 
     private Double min;//最小值
 
@@ -24,11 +24,11 @@ public class FieldVO {
         this.fieldName = fieldName;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

@@ -3,6 +3,8 @@ package com.satchain.dao;
 import com.satchain.bean.model.Earthinfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface EarthinfoMapper {
     int deleteByGroundId(@Param("groundId") String groundId);
 
@@ -14,6 +16,6 @@ public interface EarthinfoMapper {
 
     int updateByGroundId(Earthinfo record);
 
-    Earthinfo queryEarthInfoByGroundId(@Param("groundId") String groundId, @Param("groundName") String groundName);
+    List<Earthinfo> queryEarthInfoByGroundId(@Param("groundId") String groundId, @Param("groundName") String groundName);
 
 }

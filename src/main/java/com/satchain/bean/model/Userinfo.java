@@ -12,7 +12,7 @@ public class Userinfo {
 
     private String password;//密码
 
-    private Byte authority;//权限
+    private Integer authority;//权限
 
     private Date createTime;//创建时间
 
@@ -40,11 +40,11 @@ public class Userinfo {
         this.password = password;
     }
 
-    public Byte getAuthority() {
+    public Integer getAuthority() {
         return authority;
     }
 
-    public void setAuthority(Byte authority) {
+    public void setAuthority(Integer authority) {
         this.authority = authority;
     }
 

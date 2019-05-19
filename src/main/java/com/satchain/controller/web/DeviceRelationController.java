@@ -14,7 +14,6 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/")
 public class DeviceRelationController {
     @Autowired
     private DeviceRelationService deviceRelationService;

@@ -13,8 +13,9 @@ public class LoginService {
     private UserinfoMapper userinfoMapper;
 
     public String getPassword(String loginName) {
-        Userinfo user = userinfoMapper.queryUserInfoByName(loginName);
-        Assert.notNull(user,"没有此用户！");
-        return user.getPassword();
+        //Userinfo user = userinfoMapper.queryUserInfoByName(loginName);
+        //Assert.notNull(user,"没有此用户！");
+        //return user.getPassword();
+        return null;
     }
 }

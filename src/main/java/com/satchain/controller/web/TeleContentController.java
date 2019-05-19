@@ -2,6 +2,7 @@ package com.satchain.controller.web;
 
 import com.satchain.bean.bo.TeleControlContentBO;
 import com.satchain.bean.vo.ContentInfoVO;
+import com.satchain.commons.myEnum.ResponseCodeEnum;
 import com.satchain.commons.result.Result;
 import com.satchain.service.TeleContentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +18,34 @@ import java.util.List;
  * 遥控内容表：增查
  */
 @RestController
-@RequestMapping("/")
 public class TeleContentController {
 
     @Autowired
     private TeleContentService teleContentService;
 
     /**
-     * 遥控内容增加
+     * 3.9 遥控内容增加
      * @return
      */
     @RequestMapping(value = "/addTelecontrolContent", method = RequestMethod.POST)
-    public Result addTeleContent(TeleControlContentBO bo) {
+    public Result addTeleContent(TeleControlContentBO bo) throws Exception {
         Assert.notNull(bo,"参数错误！");
+        Assert.notNull(bo.getGroundid(),"参数错误!");
+        Assert.notNull(bo.getSatelliteid(),"参数错误!");
+        Assert.notNull(bo.getTasktype(),"参数错误!");
+        Assert.notNull(bo.getPlanstarttime(),"参数错误!");
+        Assert.notNull(bo.getPlanendtime(),"参数错误!");
+        Assert.notNull(bo.getTaskcontent(),"参数错误!");
 
-        teleContentService.insertTeleContent(bo);
+        int res = teleContentService.insertTeleContent(bo);
+        if (res == 0){
+            return Result.failure(ResponseCodeEnum.ERROR,"遥控内容增加失败！");
+        }
         return Result.success();
     }
 
     /**
-     * 遥控内容查询
+     * 3.10 遥控内容查询
      * @return
      */
     @RequestMapping(value = "/queryTelecontrolContent", method = RequestMethod.POST)

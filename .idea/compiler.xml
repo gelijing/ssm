@@ -9,5 +9,8 @@
         <module name="gjl" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gjl" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

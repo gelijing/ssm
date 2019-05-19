@@ -3,11 +3,11 @@ package com.satchain.bean.model;
 public class DeviceRelation {
     private Long id;
 
-    private String deviceName;
+    private String deviceName;//设备名
 
-    private String deviceFartherName;
+    private String deviceFartherName;//父设备名
 
-    private String moonNum;
+    private String moonNum;//卫星编号
 
     public Long getId() {
         return id;

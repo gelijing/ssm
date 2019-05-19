@@ -5,7 +5,7 @@ public class FieldDefine {
 
     private String fieldName;//字段名
 
-    private String dataType;//数据类型
+    private Integer dataType;//数据类型
 
     private Double minData;//最小值
 
@@ -35,11 +35,11 @@ public class FieldDefine {
         this.fieldName = fieldName;
     }
 
-    public String getDataType() {
+    public Integer getDataType() {
         return dataType;
     }
 
-    public void setDataType(String dataType) {
+    public void setDataType(Integer dataType) {
         this.dataType = dataType;
     }
 

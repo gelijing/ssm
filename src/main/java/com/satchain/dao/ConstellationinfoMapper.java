@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ConstellationinfoMapper {
 
-    int deleteById(@Param("constellationId") String constellationId);
+    int deleteById(@Param("constellationId") String constellationId, @Param("constellationName") String constellationName);
 
     int insert(Constellationinfo record);
 

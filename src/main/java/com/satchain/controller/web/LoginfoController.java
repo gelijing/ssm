@@ -1,10 +1,11 @@
 package com.satchain.controller.web;
 
-import com.satchain.bean.model.Loginfo;
+import com.satchain.bean.vo.LogInfoVO;
 import com.satchain.commons.myEnum.ResponseCodeEnum;
 import com.satchain.commons.result.Result;
 import com.satchain.service.LoginfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,9 @@ public class LoginfoController {
     @RequestMapping(value = "/queryLog", method = RequestMethod.POST)
     public Result queryLog(@RequestParam("starttime") String startTime,
                            @RequestParam("stoptime") String stopTime){
-        List<Loginfo> loginfos = loginfoService.queryLogInfo(startTime,stopTime);
+        Assert.notNull(startTime,"参数错误！");
+        Assert.notNull(stopTime,"参数错误！");
+        List<LogInfoVO> loginfos = loginfoService.queryLogInfo(startTime,stopTime);
         return Result.success(loginfos);
     }
 
@@ -38,6 +41,8 @@ public class LoginfoController {
     @RequestMapping(value = "/deleteLog", method = RequestMethod.DELETE)
     public Result deleteLog(@RequestParam("starttime") String startTime,
                           @RequestParam("stoptime") String stopTime){
+        Assert.notNull(startTime,"参数错误！");
+        Assert.notNull(stopTime,"参数错误！");
         int deleNum = loginfoService.deleteLogInfo(startTime,stopTime);
         if (deleNum == 0){
             return Result.failure(ResponseCodeEnum.ERROR,"无相应日志");

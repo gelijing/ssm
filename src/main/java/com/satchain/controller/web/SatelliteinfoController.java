@@ -1,10 +1,11 @@
 package com.satchain.controller.web;
 
-import com.satchain.bean.model.Satelliteinfo;
+import com.satchain.bean.vo.SatelliteInfoVO;
 import com.satchain.commons.myEnum.ResponseCodeEnum;
 import com.satchain.commons.result.Result;
 import com.satchain.service.SatelliteinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +31,10 @@ public class SatelliteinfoController {
      * 28新增卫星
      */
     @RequestMapping(value = "/addSatellite", method = RequestMethod.POST)
-    public Result addSatellite(Satelliteinfo bo){
+    public Result addSatellite(SatelliteInfoVO bo) throws Exception {
+
+        Assert.notNull(bo,"参数错误！");
+        Assert.notNull(bo.getSatelliteId(),"参数错误！");
         int n = satelliteinfoService.insertSatellite(bo);
         if (n == 0){
             return Result.failure(ResponseCodeEnum.ERROR,"新增卫星失败！");
@@ -52,7 +56,9 @@ public class SatelliteinfoController {
      * 30 更改卫星信息
      */
     @RequestMapping(value = "/updateSatellite", method = RequestMethod.POST)
-    public Result updateSatellite(Satelliteinfo bo){
+    public Result updateSatellite(SatelliteInfoVO bo) throws Exception {
+        Assert.notNull(bo,"参数错误！");
+        Assert.notNull(bo.getSatelliteId(),"参数错误！");
         int n = satelliteinfoService.updateSatelliteInfo(bo);
         if (n == 0){
             return Result.failure(ResponseCodeEnum.ERROR,"更改卫星信息失败！");

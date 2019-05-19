@@ -4,6 +4,7 @@ import com.satchain.bean.model.Userinfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 public interface UserinfoMapper {
 
@@ -11,11 +12,11 @@ public interface UserinfoMapper {
 
     int insertSelective(Userinfo record);
 
-    Userinfo queryUserInfoByName(@Param("username") String username);
+    List<Userinfo> queryUserInfoByName(@Param("username") String username);
 
     int updateByPrimaryKeySelective(Userinfo record);
 
-    int updateByUserName(@Param("username") String username, @Param("password") String password, @Param("permission") Integer permission);
+    int updateByUserName(@Param("username") String username, @Param("password") String password, @Param("createTime") Date createTime, @Param("permission") Integer permission);
 
     int deleteByUserName(@Param("username") String username);
 }

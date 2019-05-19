@@ -14,19 +14,17 @@ public interface TaskinfoMapper {
 
     int insertReturn(Taskinfo record);
 
-    int insertSelective(Taskinfo record);
-
     Taskinfo selectByTaskId(@Param("taskid") Integer taskid);
 
     int updateByTaskId(Taskinfo record);
 
     int updateFlagByTaskId(@Param("taskid") Integer taskid, @Param("datadistrisign") Integer datadistrisign);
 
-    List<Taskinfo> queryTaskInfoByTaskBO(@Param("constellationid") String constellationid, @Param("satelliteid") String satelliteid,
+    List<Taskinfo> queryTaskInfoByTaskBO(@Param("satelliteid") List satelliteid,
                                          @Param("tasktype") Integer tasktype, @Param("distrisign") Integer distrisign,
-                                         @Param("starttime") Timestamp planstarttime, @Param("stoptime") Timestamp planstoptime);
-    List<Taskinfo> queryTaskInfoByidAndTime(@Param("constellationid") String constellationid, @Param("satelliteid") String satelliteid,
-                                            @Param("starttime") Timestamp planstarttime, @Param("stoptime") Timestamp planstoptime);
+                                         @Param("starttime") Timestamp starttime, @Param("stoptime") Timestamp stoptime);
+    List<Taskinfo> queryTaskInfoByidAndTime(@Param("satelliteid") String satelliteid,
+                                            @Param("starttime") Timestamp starttime, @Param("stoptime") Timestamp stoptime);
 
     List<Taskinfo> queryBySatelliteId(@Param("satelliteid") String satelliteid);
 }

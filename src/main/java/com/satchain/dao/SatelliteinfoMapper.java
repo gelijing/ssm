@@ -13,9 +13,10 @@ public interface SatelliteinfoMapper {
 
     int updateByIdSelective(Satelliteinfo record);
 
-    Satelliteinfo selectBySatelliteId(@Param("satelliteId") String satelliteId, @Param("satelliteName") String satelliteName);
+    List<Satelliteinfo> selectBySatelliteId(@Param("satelliteId") String satelliteId, @Param("satelliteName") String satelliteName);
 
     int deleteByIdName(@Param("satelliteId") String satelliteId, @Param("satelliteName") String satelliteName);
 
     List<Satelliteinfo> queryBySateOrConstID(@Param("satelliteId") String satelliteId, @Param("constellationId") String constellationId);
+
 }

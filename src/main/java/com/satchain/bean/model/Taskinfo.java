@@ -26,11 +26,11 @@ public class Taskinfo {
 
     private Date taskEndTime;//任务结束时间
 
-    private Byte distributionFlag;//分发标志
+    private Integer distributionFlag;//分发标志 TODO byte 改为int
 
     private Boolean taskFlag;//任务标志
 
-    private Long ack;
+    private Integer ack;//任务执行情况
 
     public Long getId() {
         return id;
@@ -112,11 +112,11 @@ public class Taskinfo {
         this.taskEndTime = taskEndTime;
     }
 
-    public Byte getDistributionFlag() {
+    public Integer getDistributionFlag() {
         return distributionFlag;
     }
 
-    public void setDistributionFlag(Byte distributionFlag) {
+    public void setDistributionFlag(Integer distributionFlag) {
         this.distributionFlag = distributionFlag;
     }
 
@@ -128,11 +128,11 @@ public class Taskinfo {
         this.taskFlag = taskFlag;
     }
 
-    public Long getAck() {
+    public Integer getAck() {
         return ack;
     }
 
-    public void setAck(Long ack) {
+    public void setAck(Integer ack) {
         this.ack = ack;
     }
 }
